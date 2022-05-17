@@ -1,4 +1,3 @@
-
 // Assignment code here
 
 function generatePassword() {
@@ -7,78 +6,63 @@ function generatePassword() {
   var lowercaseCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   var specialCharacters = ['@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.'];
   var possibleCharacters = [];
+
+  // get input and validate
+
+  numberOfCharacters = prompt("How many characters do you want in your password? Choose between 8-128 characters.");
+  if (numberOfCharacters < 8 || numberOfCharacters > 128) {
+    return "Please choose a valid number of characters.";
+  } else if (isNaN(numberOfCharacters)) {
+    numberOfCharacters = prompt("Please enter a valid number.");
+  }
+  else {
+    alert("Your password will be " + numberOfCharacters + " characters long."); 
+  }
+
+  hasLowercase = confirm("Do you want lowercase characters?");
+  if (hasLowercase) 
+
+  hasUppercase = confirm("Do you want uppercase characters?");
+  if (hasUppercase) 
+
+  hasNumbers = confirm("Do you want to use numbers?");
+  if (hasNumbers)
+
+  hasSpecial = confirm("Do you want special characters?");
+  if (hasSpecial) {
+
+  if (hasLowercase === false && hasUppercase === false && hasNumbers === false && hasSpecial === false) {
+    return "Please select at least one character type.";
+  };
 }
 
-numberOfCharacters = prompt("How many characters do you want in your password? Choose between 8-128 characters.");
-if (numberOfCharacters < 8 || numberOfCharacters > 128) {
-  return "Please choose a valid number of characters.";
-} else if (isNaN(numberOfCharacters)) {
-  numberOfCharacters = prompt("Please enter a valid number.");
-}
-else {
-  alert("Your password will be " + numberOfCharacters + " characters long.");
-  
-}
+  // group selected characters
 
-hasLowercase = confirm("Do you want lowercase characters?");
-if (hasLowercase) {
-  var turnToLowercase = alert("Your password will have lowercase characters.");
-}
-else {
-  alert("Your password will NOT have lowercase characters.");
-}
+  if (hasLowercase) {
+    possibleCharacters = possibleCharacters.concat(lowercaseCharacters);
+  }
+  if (hasUppercase) {
+    possibleCharacters = possibleCharacters.concat(uppercaseCharacters);
+  }
+  if (hasNumbers) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+  }
+  if (hasSpecial) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+  }
 
-hasUppercase = confirm("Do you want uppercase characters?");
-if (hasUppercase) {
-  alert("Your password will have uppercase characters.");
-}
-else {
-  alert("Your password will NOT have uppercase characters.");
-}
+  // pick random cards out of new pool for length of password
 
-hasNumbers = confirm("Do you want to use numbers?");
-if (hasNumbers) {
-  alert("Your password will have numbers.");
-}
-else {
-  alert("Your password will NOT have numbers.");
-}
+  let finalPassword = ""
+  for (let i = 0; i < numberOfCharacters; i++) {
+    let rng =[Math.floor(Math.random() * possibleCharacters.length)];
 
-hasSpecial = confirm("Do you want special characters?");
-if (hasSpecial) {
-  alert("Your password will have special characters.");
-}
-else {
-  alert("Your password will NOT have special characters.");
-}
-
-if (hasLowercase === false && hasUppercase === false && hasNumbers === false && hasSpecial === false) {
-  return "Please select at least one character type.";
+    // or finalPassword += possibleCharacters[rng];
+    
+    finalPassword = finalPassword + possibleCharacters[rng];
+  }
+  return finalPassword;
 };
-
- // group selected characters
-if (hasLowercase) {
-  possibleCharacters = possibleCharacters.concat(lowercaseCharacters);
-}
-if (hasUppercase) {
-  possibleCharacters = possibleCharacters.concat(uppercaseCharacters);
-}
-if (hasNumbers) {
-  possibleCharacters = possibleCharacters.concat(numericCharacters);
-}
-if (hasSpecial) {
-  possibleCharacters = possibleCharacters.concat(specialCharacters);
-}
-
-// pick random cards out of new pool for length of password
-let finalPassword = ""
-for (let i = 0; i < numberOfCharacters; i++) {
-  let rng =[Math.floor(Math.random() * possibleCharacters.length)];
-  // or finalPassword += possibleCharacters[rng];
-  finalPassword = finalPassword + possibleCharacters[rng];
-}
-return finalPassword;
-
 
 // Get references to the #generate element
 
