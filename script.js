@@ -56,6 +56,30 @@ if (hasLowercase === false && hasUppercase === false && hasNumbers === false && 
   return "Please select at least one character type.";
 };
 
+ // group selected characters
+if (hasLowercase) {
+  possibleCharacters = possibleCharacters.concat(lowercaseCharacters);
+}
+if (hasUppercase) {
+  possibleCharacters = possibleCharacters.concat(uppercaseCharacters);
+}
+if (hasNumbers) {
+  possibleCharacters = possibleCharacters.concat(numericCharacters);
+}
+if (hasSpecial) {
+  possibleCharacters = possibleCharacters.concat(specialCharacters);
+}
+
+// pick random cards out of new pool for length of password
+let finalPassword = ""
+for (let i = 0; i < numberOfCharacters; i++) {
+  let rng =[Math.floor(Math.random() * possibleCharacters.length)];
+  // or finalPassword += possibleCharacters[rng];
+  finalPassword = finalPassword + possibleCharacters[rng];
+}
+return finalPassword;
+
+
 // Get references to the #generate element
 
 var generateBtn = document.querySelector("#generate");
